@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="item_radius">12dp</dimen>
+    <dimen name="item_padding">8dp</dimen>
+    <dimen name="item_elevation">6dp</dimen>
+
+    <dimen name="margin_start_flag">4dp</dimen>
+    <dimen name="margin_horizontal_text">8dp</dimen>
+    <dimen name="item_margin">8dp</dimen>
+    <dimen name="margin_top_recycler_view">8dp</dimen>
+
+    <dimen name="width_flag">60dp</dimen>
+    <dimen name="height_flag">32dp</dimen>
+
+    <dimen name="width_flag_detail">30dp</dimen>
+    <dimen name="height_flag_detail">16dp</dimen>
+
+    <dimen name="title_size">20dp</dimen>
+    <dimen name="subtitle_size">16dp</dimen>
+    <dimen name="body_size">14dp</dimen>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SymbolsLayout">
+        <attr name="title" format="string" />
+        <attr name="android:scaleType"/>
+    </declare-styleable>
+
+    <declare-styleable name="HeaderDetailLayout">
+        <attr name="headerTitle" format="string" />
+    </declare-styleable>
+</resources>
