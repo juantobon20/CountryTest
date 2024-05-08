@@ -6,6 +6,7 @@ import com.juantobon20.countrytest.adaptation.CountryListView
 import com.juantobon20.countrytest.domain.usecases.FetchCountriesBySearchUseCase
 import com.juantobon20.countrytest.views.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
@@ -14,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchCountryActivityViewModel @Inject constructor(
-    private val fetchCountriesBySearchUseCase: FetchCountriesBySearchUseCase
+    private val fetchCountriesBySearchUseCase: FetchCountriesBySearchUseCase,
+    private val dispatcher: CoroutineDispatcher
 ) : BaseViewModel<SearchCountryActivityViewModel.State, Nothing>(State()) {
 
 
@@ -26,7 +28,7 @@ class SearchCountryActivityViewModel @Inject constructor(
             }
 
             fetchCountriesBySearchUseCase(search)
-                .flowOn(Dispatchers.IO)
+                .flowOn(dispatcher)
                 .catch { ex -> Log.e("Test", "${ex.message}") }
                 .collect { countries ->
                     val countriesListView = countries.map { it.mapperToCountryList() }

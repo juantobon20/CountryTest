@@ -10,6 +10,7 @@ import com.juantobon20.countrytest.views.base.BaseViewModel
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -17,18 +18,14 @@ import kotlinx.coroutines.withContext
 
 class CountryDetailFragmentViewModel @AssistedInject constructor(
     @Assisted val countryCode: String,
-    private val fetchCountryByCodeUseCase: FetchCountryByCodeUseCase
+    private val fetchCountryByCodeUseCase: FetchCountryByCodeUseCase,
+    private val dispatcher: CoroutineDispatcher
 ) : BaseViewModel<CountryDetailFragmentViewModel.State, Nothing>(State()) {
 
-    init {
-        fetchCountryByCode(countryCode)
-    }
-
-    private fun fetchCountryByCode(countryCode: String) {
+    fun fetchCountryByCode() {
         viewModelScope.launch {
             update(currentState().copy(isLoading = true))
-            withContext(Dispatchers.IO) {
-                delay(2000)
+            withContext(dispatcher) {
                 try {
                     val countryData = fetchCountryByCodeUseCase(countryCode) ?: throw Exception("Country not found")
                     val borderCountries = countryData.borderingCountries.map {

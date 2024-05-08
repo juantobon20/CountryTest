@@ -1,6 +1,7 @@
 package com.juantobon20.countrytest.di
 
 import android.content.Context
+import android.net.ConnectivityManager
 import com.juantobon20.countrytest.domain.helper.NetworkHelper
 import com.juantobon20.countrytest.domain.helper.NetworkHelperImp
 import dagger.Module
@@ -14,9 +15,16 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DomainModule {
 
+
+    @Provides
+    @Singleton
+    fun provideConnectivityManage(
+        @ApplicationContext context: Context
+    ) : ConnectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
     @Provides
     @Singleton
     fun provideNetworkHelper(
-        @ApplicationContext context: Context
-    ) : NetworkHelper = NetworkHelperImp(context = context)
+        connectivityManager: ConnectivityManager
+    ) : NetworkHelper = NetworkHelperImp(connectivityManager = connectivityManager)
 }

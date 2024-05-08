@@ -95,6 +95,8 @@ class CountryDetailFragment : Fragment(), IOnClickListener {
                 countryAdapter.onLoad(countryView.borderingCountries)
             }
         }
+
+        viewModel.fetchCountryByCode()
     }
 
     override fun <T> onClick(t: T) {

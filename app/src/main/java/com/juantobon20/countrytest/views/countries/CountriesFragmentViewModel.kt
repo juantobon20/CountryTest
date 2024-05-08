@@ -9,6 +9,7 @@ import com.juantobon20.countrytest.domain.usecases.FetchAllCountriesUseCase
 import com.juantobon20.countrytest.domain.usecases.SaveCountriesUseCase
 import com.juantobon20.countrytest.views.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
@@ -21,13 +22,14 @@ import javax.inject.Inject
 class CountriesFragmentViewModel @Inject constructor(
     private val fetchAllCountriesUseCase: FetchAllCountriesUseCase,
     private val saveCountriesUseCase: SaveCountriesUseCase,
-    private val networkHelper: NetworkHelper
+    private val networkHelper: NetworkHelper,
+    private val dispatcher: CoroutineDispatcher
 ) : BaseViewModel<CountriesFragmentViewModel.State, Nothing>(initialState = State()) {
 
     fun fetchAllCountries() {
         viewModelScope.launch {
             fetchAllCountriesUseCase()
-                .flowOn(Dispatchers.IO)
+                .flowOn(dispatcher)
                 .onStart {
                     update(
                         currentState().copy(

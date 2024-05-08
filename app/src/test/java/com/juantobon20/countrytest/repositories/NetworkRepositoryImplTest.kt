@@ -1,10 +1,10 @@
-package com.juantobon20.countrytest.data.repositories
+package com.juantobon20.countrytest.repositories
 
 import com.juantobon20.countrytest.data.common.exceptions.ServerError
-import com.juantobon20.countrytest.data.models.network.CountryResponse
-import com.juantobon20.countrytest.data.models.network.NameResponse
+import com.juantobon20.countrytest.data.repositories.NetworkRepositoryImpl
 import com.juantobon20.countrytest.data.services.ApiService
 import com.juantobon20.countrytest.domain.repositories.NetworkRepository
+import com.juantobon20.countrytest.utils.fakeApiData
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -32,7 +32,7 @@ class NetworkRepositoryImplTest {
     fun `when the method is called it should return a list of countries`() = runTest {
         coEvery {
             apiService.fetchAllCountries()
-        } returns fakeData
+        } returns fakeApiData
 
         val response = networkRepository.fetchAllCountries().first()
 
@@ -40,7 +40,7 @@ class NetworkRepositoryImplTest {
             apiService.fetchAllCountries()
         }
 
-        assertEquals(fakeData, response)
+        assertEquals(fakeApiData, response)
     }
 
     @Test
@@ -60,44 +60,3 @@ class NetworkRepositoryImplTest {
         }
     }
 }
-
-val fakeData = listOf(
-    CountryResponse(
-        name = NameResponse(
-            common = "Common Test123",
-            official = "Official Test123"
-        ),
-        cioc = "123",
-        cca2 = "1234",
-        cca3 = null,
-        currencies = "TEST",
-        capital = listOf("Test"),
-        region = "Test",
-        subregion = null,
-        borders = listOf("Test"),
-        area = 1234F,
-        timezones = listOf("Test"),
-        flags = null,
-        coatOfArms = null,
-        startOfWeek = "Test"
-    ),
-    CountryResponse(
-        name = NameResponse(
-            common = "Common Test1234",
-            official = "Official Test1234"
-        ),
-        cioc = "1234",
-        cca2 = "12345",
-        cca3 = null,
-        currencies = "TEST6",
-        capital = listOf("Test6"),
-        region = "Test",
-        subregion = null,
-        borders = listOf("Test6"),
-        area = 1234F,
-        timezones = listOf("Test6"),
-        flags = null,
-        coatOfArms = null,
-        startOfWeek = "Test6"
-    )
-)

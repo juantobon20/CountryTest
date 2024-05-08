@@ -25,6 +25,6 @@ interface CountryDAO {
     suspend fun fetchCountryByCode(code: String) : CountryEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(countriesList: List<CountryEntity>)
+    suspend fun insertAll(countriesList: List<CountryEntity>)
 
 }
