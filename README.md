@@ -22,9 +22,11 @@
 
 
 <h2>Diagrama de estructura</h2>
+<div style="display:flex;">
 <img src="https://www.gregorypacheco.com.br/posts/img/clean-architecture.png" alt="project-screenshot" width="300" height="300/">
 
 <img src="https://miro.medium.com/v2/resize:fit:1400/1*k3G2EYx8lCPYHbMH8x1tcg.png" alt="project-screenshot" width="300" height="300/">
+</div>
 
 <h2>Screenshots</h2>
 <div style="display:flex;">
