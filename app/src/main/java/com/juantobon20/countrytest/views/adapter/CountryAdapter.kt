@@ -1,9 +1,9 @@
-package com.juantobon20.countrytest.views.countries.adapter
+package com.juantobon20.countrytest.views.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.juantobon20.countrytest.databinding.ItemCountryBinding
-import com.juantobon20.countrytest.domain.models.CountryListView
+import com.juantobon20.countrytest.adaptation.CountryListView
 import com.juantobon20.countrytest.views.base.BaseAdapter
 import com.juantobon20.countrytest.views.listeners.IOnClickListener
 

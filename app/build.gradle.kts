@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.navigationSafeArgsKotlin)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.daggerHilt)
 }
 
 android {
@@ -18,6 +20,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -25,6 +31,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"https://restcountries.com/v3.1/\"")
+        }
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://restcountries.com/v3.1/\"")
         }
     }
     compileOptions {
@@ -52,4 +62,17 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(libs.androidx.room.kts)
+    ksp(libs.androidx.room.ksp)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+    implementation(libs.retrofit.logging.interceptor)
+
+    implementation(libs.glide)
+    ksp(libs.glide.ksp)
+
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 }

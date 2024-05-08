@@ -5,115 +5,77 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.juantobon20.countrytest.R
+import com.juantobon20.countrytest.adaptation.CountryListView
 import com.juantobon20.countrytest.databinding.FragmentCountryDetailBinding
-import com.juantobon20.countrytest.domain.models.CountryListView
+import com.juantobon20.countrytest.utils.handleState
+import com.juantobon20.countrytest.views.countries.CountriesFragmentDirections
 import com.juantobon20.countrytest.views.countryDetail.adapter.CountryAdapter
 import com.juantobon20.countrytest.views.countryDetail.adapter.TimeZoneAdapter
+import com.juantobon20.countrytest.views.listeners.IOnClickListener
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class CountryDetailFragment : Fragment(){
+@AndroidEntryPoint
+class CountryDetailFragment : Fragment(), IOnClickListener {
+
+    private val timeZoneAdapter: TimeZoneAdapter = TimeZoneAdapter()
+    private val countryAdapter: CountryAdapter = CountryAdapter(listener = this)
 
     private val args: CountryDetailFragmentArgs by navArgs()
-
     private lateinit var binding: FragmentCountryDetailBinding
-    private val timeZoneAdapter: TimeZoneAdapter = TimeZoneAdapter()
-    private val countryAdapter: CountryAdapter = CountryAdapter()
+
+    @Inject
+    lateinit var factory: CountryDetailFragmentViewModel.Factory
+    private val viewModel: CountryDetailFragmentViewModel by viewModels {
+        CountryDetailFragmentViewModel.providerFactory(
+            factory = factory,
+            countryCode = args.countryCode
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCountryDetailBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        binding.symbolCoatLayout.image.setImageDrawable(
-            ContextCompat.getDrawable(
-                requireContext(),
-                R.drawable.coat
-            )
-        )
-
-        binding.hdCapital.setDetailText("Bogotá")
-        binding.hdArea.setDetailText("1.000.000 mt2")
-        binding.hdRegion.setDetailText("Americá")
-        binding.hdSubRegion.setDetailText("Americá del Sur")
-        binding.hdCurrency.setDetailText("Moneda Colombiana")
-        binding.hdStartOfWeek.setDetailText("Lunes")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.rcTimeZones.adapter = timeZoneAdapter
-
         binding.rcBorderingCountries.adapter = countryAdapter
 
-        val list = listOf(
-            "UTC-05:00", "UTC-05:00", "UTC-05:00", "UTC-05:00", "UTC-05:00", "UTC-05:00"
-        )
-        timeZoneAdapter.onLoad(list)
+        handleState(stateFlow = viewModel.stateFlow) { state ->
+            state.countryView?.let { countryView ->
 
-        val fake = listOf(
-            CountryListView(
-                code = "COL",
-                name = "Colombia",
-                capital = "Bogotá"
-            ),
-            CountryListView(
-                code = "USA",
-                name = "Estados Unidos",
-                capital = "Washington D. C."
-            ),
-            CountryListView(
-                code = "COL",
-                name = "Colombia",
-                capital = "Bogotá"
-            ),
-            CountryListView(
-                code = "USA",
-                name = "Estados Unidos",
-                capital = "Washington D. C."
-            ),
-            CountryListView(
-                code = "COL",
-                name = "Colombia",
-                capital = "Bogotá"
-            ),
-            CountryListView(
-                code = "USA",
-                name = "Estados Unidos",
-                capital = "Washington D. C."
-            ),
-            CountryListView(
-                code = "COL",
-                name = "Colombia",
-                capital = "Bogotá"
-            ),
-            CountryListView(
-                code = "USA",
-                name = "Estados Unidos",
-                capital = "Washington D. C."
-            ),
-            CountryListView(
-                code = "COL",
-                name = "Colombia",
-                capital = "Bogotá"
-            ),
-            CountryListView(
-                code = "USA",
-                name = "Estados Unidos",
-                capital = "Washington D. C."
-            ), CountryListView(
-                code = "COL",
-                name = "Colombia",
-                capital = "Bogotá"
-            ),
-            CountryListView(
-                code = "USA",
-                name = "Estados Unidos",
-                capital = "Washington D. C."
+                binding.symbolFlagLayout.getImageFromUrl(countryView.flag)
+                binding.symbolCoatLayout.getImageFromUrl(countryView.coatOfArm)
+
+                binding.lblOfficialName.text = countryView.official
+                binding.hdCapital.setDetailText(countryView.capital)
+                binding.hdArea.setDetailText(countryView.area)
+                binding.hdRegion.setDetailText(countryView.region)
+                binding.hdSubRegion.setDetailText(countryView.subregion)
+                binding.hdCurrency.setDetailText(countryView.currency)
+                binding.hdStartOfWeek.setDetailText(countryView.startOfWeek)
+                timeZoneAdapter.onLoad(countryView.timeZones)
+                countryAdapter.onLoad(countryView.borderingCountries)
+            }
+        }
+    }
+
+    override fun <T> onClick(t: T) {
+        if (t is CountryListView) {
+            val action = CountryDetailFragmentDirections.actionCountryDetailFragmentSelf(
+                countryCode = t.code,
+                countryName = t.name
             )
-        )
-        countryAdapter.onLoad(fake)
-
-        println(args.countryCode)
-        return binding.root
+            findNavController().navigate(action)
+        }
     }
 }

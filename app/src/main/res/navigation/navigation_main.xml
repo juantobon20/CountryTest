@@ -9,10 +9,18 @@
         android:id="@+id/countriesFragment"
         android:name="com.juantobon20.countrytest.views.countries.CountriesFragment"
         android:label="@string/countries"
-        tools:layout="@layout/fragment_countries" >
+        tools:layout="@layout/fragment_countries">
         <action
             android:id="@+id/action_countriesFragment_to_countryDetailFragment"
             app:destination="@id/countryDetailFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_enter_anim"
+            app:popExitAnim="@anim/pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_countriesFragment_to_searchCountryActivity"
+            app:destination="@id/searchCountryActivity"
             app:enterAnim="@anim/enter_anim"
             app:exitAnim="@anim/exit_anim"
             app:popEnterAnim="@anim/pop_enter_anim"
@@ -23,12 +31,25 @@
         android:id="@+id/countryDetailFragment"
         android:name="com.juantobon20.countrytest.views.countryDetail.CountryDetailFragment"
         android:label="{countryName}"
-        tools:layout="@layout/fragment_country_detail" >
+        tools:layout="@layout/fragment_country_detail">
         <argument
             android:name="countryCode"
             app:argType="string" />
         <argument
             android:name="countryName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_countryDetailFragment_self"
+            app:destination="@id/countryDetailFragment"
+            app:enterAnim="@anim/enter_anim"
+            app:exitAnim="@anim/exit_anim"
+            app:popEnterAnim="@anim/pop_enter_anim"
+            app:popExitAnim="@anim/pop_exit_anim" />
     </fragment>
+
+    <activity
+        android:id="@+id/searchCountryActivity"
+        android:name="com.juantobon20.countrytest.views.search.SearchCountryActivity"
+        android:label="activity_search_country"
+        tools:layout="@layout/activity_search_country"/>
 </navigation>
