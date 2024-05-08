@@ -1,6 +1,7 @@
 package com.juantobon20.countrytest.di
 
 import com.juantobon20.countrytest.BuildConfig
+import com.juantobon20.countrytest.data.common.interceptors.ConnectionInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,6 +26,7 @@ object NetworkModule {
             .retryOnConnectionFailure(true)
             .followRedirects(true)
             .followSslRedirects(true)
+            .addInterceptor(ConnectionInterceptor())
 
         if (BuildConfig.DEBUG) {
             okHttpClient.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))

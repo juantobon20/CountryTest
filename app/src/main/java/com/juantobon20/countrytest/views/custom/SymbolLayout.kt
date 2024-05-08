@@ -10,6 +10,8 @@ import androidx.core.content.withStyledAttributes
 import com.juantobon20.countrytest.R
 import com.juantobon20.countrytest.databinding.LayoutSymbolBinding
 import com.juantobon20.countrytest.utils.loadImageFromUrl
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 
 class SymbolLayout @JvmOverloads constructor(
     context: Context,
@@ -28,6 +30,16 @@ class SymbolLayout @JvmOverloads constructor(
                 binding.image.scaleType = ImageView.ScaleType.entries.toTypedArray()[scaleTypeIndex]
             }
         }
+    }
+
+    fun startSkeleton() {
+        binding.lblTitle.loadSkeleton(length = 10)
+        binding.image.loadSkeleton()
+    }
+
+    fun stopSkeleton() {
+        binding.lblTitle.hideSkeleton()
+        binding.image.hideSkeleton()
     }
 
     fun getImageFromUrl(url: String?) {

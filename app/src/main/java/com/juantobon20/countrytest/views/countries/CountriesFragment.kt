@@ -22,6 +22,8 @@ import com.juantobon20.countrytest.views.adapter.CountryAdapter
 import com.juantobon20.countrytest.views.listeners.IOnClickListener
 import com.juantobon20.countrytest.views.search.SearchCountryActivity
 import dagger.hilt.android.AndroidEntryPoint
+import koleton.api.hideSkeleton
+import koleton.api.loadSkeleton
 
 @AndroidEntryPoint
 class CountriesFragment : Fragment(), IOnClickListener {
@@ -75,6 +77,14 @@ class CountriesFragment : Fragment(), IOnClickListener {
 
     private fun handles() {
         handleState(stateFlow = viewModel.stateFlow) { state ->
+            if (state.isLoading) {
+                binding.rcCountries.loadSkeleton(R.layout.item_country_skeleton) {
+                    itemCount(10)
+                }
+            } else {
+                binding.rcCountries.hideSkeleton()
+            }
+
             adapter.onLoad(state.countries)
         }
     }

@@ -2,30 +2,31 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:background="@color/white"
-    android:layout_height="match_parent"
-    tools:context=".views.search.SearchCountryActivity">
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <TextView
+        android:id="@+id/lblTitle"
+        style="@style/subtitle"
         android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navigationContentDescription="@string/app_name" />
+        tools:text="@string/time_zone" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcCountries"
+        android:id="@+id/recyclerView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/white"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:orientation="horizontal"
+        android:padding="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:listitem="@layout/item_country" />
+        app:layout_constraintTop_toBottomOf="@id/lblTitle"
+        tools:listitem="@layout/item_time_zone" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

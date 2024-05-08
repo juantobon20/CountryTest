@@ -49,7 +49,9 @@
             android:id="@+id/hdCapital"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             app:headerTitle="@string/capital"
             app:layout_constraintEnd_toStartOf="@id/guideline"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +61,9 @@
             android:id="@+id/hdArea"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             app:headerTitle="@string/area"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"
@@ -69,7 +73,9 @@
             android:id="@+id/hdRegion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             app:headerTitle="@string/region"
             app:layout_constraintEnd_toStartOf="@id/guideline"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +85,9 @@
             android:id="@+id/hdSubRegion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             app:headerTitle="@string/subRegion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"
@@ -89,7 +97,9 @@
             android:id="@+id/hdCurrency"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
             app:headerTitle="@string/currency"
             app:layout_constraintEnd_toStartOf="@id/guideline"
             app:layout_constraintStart_toStartOf="parent"
@@ -99,60 +109,36 @@
             android:id="@+id/hdStartOfWeek"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             app:headerTitle="@string/start_of_week"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline"
             app:layout_constraintTop_toBottomOf="@id/hdSubRegion" />
 
-        <TextView
-            android:id="@+id/lblTimeZone"
-            style="@style/subtitle"
+        <com.juantobon20.countrytest.views.custom.RecyclerViewWithTitle
+            android:id="@+id/rvTimeZones"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hdCurrency"
+            app:orientation="horizontal"
+            app:recyclerTitle="@string/time_zone"
+            app:typeLayoutManager="linearLayout" />
+
+        <com.juantobon20.countrytest.views.custom.RecyclerViewWithTitle
+            android:id="@+id/rvBorderingCountries"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/time_zone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/hdCurrency" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcTimeZones"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lblTimeZone"
-            tools:listitem="@layout/item_time_zone" />
-
-        <TextView
-            android:id="@+id/lblBorderingCountries"
-            style="@style/subtitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/bordering_with"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rcTimeZones" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcBorderingCountries"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/lblBorderingCountries"
-            app:spanCount="2"
-            tools:listitem="@layout/item_country" />
+            app:layout_constraintTop_toBottomOf="@id/rvTimeZones"
+            app:orientation="vertical"
+            app:recyclerTitle="@string/bordering_with"
+            app:typeLayoutManager="gridLayout" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"

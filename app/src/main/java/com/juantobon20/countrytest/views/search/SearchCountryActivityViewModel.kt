@@ -1,5 +1,6 @@
 package com.juantobon20.countrytest.views.search
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.juantobon20.countrytest.adaptation.CountryListView
 import com.juantobon20.countrytest.domain.usecases.FetchCountriesBySearchUseCase
@@ -26,7 +27,7 @@ class SearchCountryActivityViewModel @Inject constructor(
 
             fetchCountriesBySearchUseCase(search)
                 .flowOn(Dispatchers.IO)
-                .catch { ex -> print(ex) }
+                .catch { ex -> Log.e("Test", "${ex.message}") }
                 .collect { countries ->
                     val countriesListView = countries.map { it.mapperToCountryList() }
                     update(

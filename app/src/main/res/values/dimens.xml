@@ -4,6 +4,8 @@
     <dimen name="item_padding">8dp</dimen>
     <dimen name="item_elevation">6dp</dimen>
 
+    <dimen name="radius">8dp</dimen>
+
     <dimen name="margin_start_flag">4dp</dimen>
     <dimen name="margin_horizontal_text">8dp</dimen>
     <dimen name="item_margin">8dp</dimen>

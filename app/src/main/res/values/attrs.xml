@@ -2,10 +2,23 @@
 <resources>
     <declare-styleable name="SymbolsLayout">
         <attr name="title" format="string" />
-        <attr name="android:scaleType"/>
+        <attr name="android:scaleType" />
     </declare-styleable>
 
     <declare-styleable name="HeaderDetailLayout">
         <attr name="headerTitle" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="RecyclerViewWithTitle">
+        <attr name="recyclerTitle" format="string" />
+        <attr name="typeLayoutManager" format="enum">
+            <enum name="linearLayout" value="0" />
+            <enum name="gridLayout" value="1" />
+        </attr>
+        <attr name="orientation" format="enum">
+            <enum name="vertical" value="1" />
+            <enum name="horizontal" value="0" />
+        </attr>
+        <attr name="spanCount" format="integer"/>
     </declare-styleable>
 </resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/item_margin"
+    android:layout_marginBottom="@dimen/item_margin"
+    android:clickable="true"
+    android:elevation="@dimen/item_elevation"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/skeleton_background"
+    app:cardCornerRadius="@dimen/item_radius">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/item_padding">
+
+        <View
+            android:id="@+id/imgFlag"
+            android:layout_width="@dimen/width_flag"
+            android:layout_height="@dimen/height_flag"
+            android:layout_marginStart="@dimen/margin_start_flag"
+            android:background="@color/skeleton"
+            android:contentDescription="@string/flag"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/lblCountryName"
+            android:layout_width="0dp"
+            android:layout_height="18dp"
+            android:layout_marginHorizontal="@dimen/margin_horizontal_text"
+            android:background="@color/skeleton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgFlag"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/lblCapital"
+            android:layout_width="0dp"
+            android:layout_height="12dp"
+            android:layout_marginHorizontal="@dimen/margin_horizontal_text"
+            android:layout_marginTop="2dp"
+            android:background="@color/skeleton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imgFlag"
+            app:layout_constraintTop_toBottomOf="@id/lblCountryName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -4,6 +4,7 @@ import com.juantobon20.countrytest.data.models.network.CountryResponse
 import com.juantobon20.countrytest.data.services.ApiService
 import com.juantobon20.countrytest.domain.repositories.NetworkRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 
 class NetworkRepositoryImpl(

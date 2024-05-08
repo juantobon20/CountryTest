@@ -6,7 +6,6 @@ import com.juantobon20.countrytest.data.common.converters.ImageUrlDeserialize
 
 data class CountryResponse(
     val name: NameResponse,
-    val tld: List<String>,
     val cioc: String?,
     val cca2: String?,
     val cca3: String?,
@@ -16,17 +15,10 @@ data class CountryResponse(
     val subregion: String?,
     val borders: List<String>?,
     val area: Float,
-    val maps: MapsResponse,
     val timezones: List<String>,
-    val continents: List<String>,
     @JsonAdapter(ImageUrlDeserialize::class) val flags: String?,
     @JsonAdapter(ImageUrlDeserialize::class) val coatOfArms: String?,
     val startOfWeek: String
-)
-
-data class MapsResponse(
-    val googleMaps: String,
-    val openStreetMaps: String
 )
 
 data class NameResponse(

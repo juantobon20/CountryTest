@@ -1,5 +1,6 @@
 package com.juantobon20.countrytest.views.countryDetail
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -10,6 +11,7 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -24,22 +26,25 @@ class CountryDetailFragmentViewModel @AssistedInject constructor(
 
     private fun fetchCountryByCode(countryCode: String) {
         viewModelScope.launch {
+            update(currentState().copy(isLoading = true))
             withContext(Dispatchers.IO) {
+                delay(2000)
                 try {
                     val countryData = fetchCountryByCodeUseCase(countryCode) ?: throw Exception("Country not found")
                     val borderCountries = countryData.borderingCountries.map {
                         fetchCountryByCodeUseCase(it.trim())?.mapperToCountryList()
                     }
                     val countryView = countryData.mapperToCountryView(borderCountries.filterNotNull())
-                    update(currentState().copy(countryView = countryView))
+                    update(currentState().copy(countryView = countryView, isLoading = false))
                 } catch (ex: Exception) {
-                    println(ex)
+                    Log.e("Test", "${ex.message}")
                 }
             }
         }
     }
 
     data class State(
+        val isLoading: Boolean = false,
         val countryView: CountryView? = null
     )
 

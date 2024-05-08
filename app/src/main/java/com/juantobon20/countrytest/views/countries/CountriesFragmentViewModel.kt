@@ -1,5 +1,6 @@
 package com.juantobon20.countrytest.views.countries
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.juantobon20.countrytest.adaptation.CountryListView
 import com.juantobon20.countrytest.domain.helper.NetworkHelper
@@ -11,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -26,8 +28,16 @@ class CountriesFragmentViewModel @Inject constructor(
         viewModelScope.launch {
             fetchAllCountriesUseCase()
                 .flowOn(Dispatchers.IO)
+                .onStart {
+                    update(
+                        currentState().copy(
+                            isLoading = true,
+                            countries = emptyList()
+                        )
+                    )
+                }
                 .catch { ex ->
-                    println(ex.message)
+                    Log.e("Test", "${ex.message}")
                 }.collect { countriesData ->
                     if (networkHelper.isInternetAvailable()) {
                         saveAllCountries(countriesData)
@@ -39,6 +49,7 @@ class CountriesFragmentViewModel @Inject constructor(
 
                     update(
                         currentState().copy(
+                            isLoading = false,
                             countries = countriesList
                         )
                     )
@@ -55,6 +66,7 @@ class CountriesFragmentViewModel @Inject constructor(
     }
 
     data class State(
+        val isLoading: Boolean = false,
         var countries: List<CountryListView> = emptyList()
     )
 }
