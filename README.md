@@ -27,6 +27,8 @@
 <img src="https://miro.medium.com/v2/resize:fit:1400/1*k3G2EYx8lCPYHbMH8x1tcg.png" alt="project-screenshot" width="300" height="300/">
 
 <h2>Screenshots</h2>
-<img src="https://github.com/juantobon20/CountryTest/blob/feature/5-readme/screenshots/home.png?raw=true" alt="project-screenshot" width="150" height="300/">
-<img src="https://github.com/juantobon20/CountryTest/blob/feature/5-readme/screenshots/search.png?raw=true" alt="project-screenshot" width="150" height="300/">
-<img src="https://github.com/juantobon20/CountryTest/blob/feature/5-readme/screenshots/detail.png?raw=true" alt="project-screenshot" width="150" height="300/">
+<div style="display:flex;">
+    <img src="https://github.com/juantobon20/CountryTest/blob/feature/5-readme/screenshots/home.png?raw=true" alt="project-screenshot" width="150" height="300/">
+    <img src="https://github.com/juantobon20/CountryTest/blob/feature/5-readme/screenshots/search.png?raw=true" alt="project-screenshot" width="150" height="300/">
+    <img src="https://github.com/juantobon20/CountryTest/blob/feature/5-readme/screenshots/detail.png?raw=true" alt="project-screenshot" width="150" height="300/">
+</div>
