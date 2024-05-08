@@ -30,7 +30,7 @@
 
 <h2>Screenshots</h2>
 <div style="display:flex;">
-    <img src="https://github.com/juantobon20/CountryTest/blob/feature/5-readme/screenshots/home.png?raw=true" alt="project-screenshot" width="150" height="300/">
-    <img src="https://github.com/juantobon20/CountryTest/blob/feature/5-readme/screenshots/search.png?raw=true" alt="project-screenshot" width="150" height="300/">
-    <img src="https://github.com/juantobon20/CountryTest/blob/feature/5-readme/screenshots/detail.png?raw=true" alt="project-screenshot" width="150" height="300/">
+    <img src="https://github.com/juantobon20/CountryTest/blob/develop/screenshots/home.png?raw=true" alt="project-screenshot" width="150" height="300/">
+    <img src="https://github.com/juantobon20/CountryTest/blob/develop/screenshots/search.png?raw=true" alt="project-screenshot" width="150" height="300/">
+    <img src="https://github.com/juantobon20/CountryTest/blob/develop/screenshots/detail.png?raw=true" alt="project-screenshot" width="150" height="300/">
 </div>
